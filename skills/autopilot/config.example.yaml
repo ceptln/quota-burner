@@ -1,0 +1,44 @@
+# One shared config for every agent. Install as .quota-burner/config.yaml.
+# Each menu name resolves to an installed skill; its targeting and done criteria live there.
+context: .quota-burner/context.md
+tracker: github # Reference binding in .quota-burner/CONTRACT.md; adapt it for another tracker.
+
+meter:
+  trusted_authors:
+    claude: ["github-actions[bot]"]
+    codex: [] # Set the exact login of your own meter publisher before enabling Codex runs.
+
+gate:
+  weekly_ceiling_points: 90
+  run_cost_points: 5
+  rate_floor: 0.25
+  staleness_points_per_hour: 3
+  five_hour_max: 0.50
+  overage_max: 0.0
+  max_open_prs: 3
+  snapshot_max_age_minutes: 240
+
+notify:
+  channel: "" # Optional; enabling delivery also requires the owner's authorization.
+
+rotation:
+  cooldown_runs: 3
+
+menu:
+  - { name: security-fix, enabled: true, chantier: false }
+  - { name: perf-fix, enabled: true, chantier: false }
+  - { name: refactor-slice, enabled: true, chantier: false }
+  - { name: pattern-align, enabled: true, chantier: true }
+  - { name: dedupe-factor, enabled: true, chantier: false }
+  - { name: ci-doctor, enabled: true, chantier: false }
+  - { name: ds-migrate, enabled: true, chantier: true }
+  - { name: primitives-align, enabled: true, chantier: true }
+  - { name: dead-code-sweep, enabled: true, chantier: false }
+  - { name: todo-reaper, enabled: true, chantier: false }
+  - { name: docs-drift, enabled: true, chantier: false }
+  - { name: harvest-reviews, enabled: true, chantier: false }
+  - { name: ui-review, enabled: false, chantier: true }
+  # Optional additions. Enable when they address a real need and their evidence is available.
+  - { name: deps-patrol, enabled: false, chantier: false }
+  - { name: test-gap-fill, enabled: false, chantier: false }
+  - { name: flaky-hunt, enabled: false, chantier: false }
